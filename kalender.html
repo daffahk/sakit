@@ -24,6 +24,71 @@ var urlx=getScriptUrl();
     <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.bubble.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css" rel="stylesheet">
     <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css">
+    <style>
+      .fc-state-default {
+        text-shadow: none;
+        box-shadow: none;
+      }
+
+      .fc-basic-view .fc-body .fc-row {
+        min-height: 5rem;
+      }
+
+      .fc-toolbar .fc-button-group {
+        border: 1px solid #2961ff;
+        border-radius: 4px;
+      }
+
+      .fc-toolbar .fc-button {
+        background: #2961ff;
+        color: #fff;
+        border: none;
+      }
+
+      .fc-toolbar .fc-button:hover {
+        background: #2961ff;
+        opacity: 1;
+      }
+
+      .fc-toolbar .fc-button.fc-state-active {
+        background: #fff;
+        color: #2961ff;
+      }
+
+      .fc-widget-header {
+        border: 0px !important;
+      }
+
+      .fc-widget-content {
+        border-color: rgba(120, 130, 140, 0.13) !important;
+      }
+
+      .fc-widget-content tr {
+        border-bottom: none;
+      }
+
+      .fc-view {
+        margin-top: 0px;
+      }
+
+      .fc-toolbar {
+        margin: 0px;
+        padding: 24px 0px;
+      }
+
+      .fc-event {
+        border-radius: 0px;
+        border: none;
+        cursor: move;
+        color: #fff !important;
+        font-size: 13px;
+        margin: 1px -1px 0 -1px;
+        padding: 5px 5px;
+        text-align: center;
+        background: #40c4ff;
+      }
+    </style>
     <!-- Template Main CSS File -->
     <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/css/style.css" rel="stylesheet">
     <!-- =======================================================
@@ -32,40 +97,42 @@ var urlx=getScriptUrl();
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-<style>
-  .loading-screen {
-    position: fixed;
-    z-index: 999;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+    <style>
+      .loading-screen {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-  .loading-spinner {
-    border: 16px solid #f3f3f3;
-    border-top: 16px solid #3498db;
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-  }
+      .loading-spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
 
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
 
-
-</head>
-
-<body>
-<div id="loading-screen" class="loading-screen" style="display: flex;">
-  <div class="loading-spinner"></div>
-</div>
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-screen" class="loading-screen" style="display: flex;">
+      <div class="loading-spinner"></div>
+    </div>
     <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
       <div class="d-flex align-items-center justify-content-between">
@@ -130,11 +197,37 @@ var urlx=getScriptUrl();
                   <div class="card-body">
                     <h5 class="card-title">Kalender Pencairan <span>| Keseluruhan</span>
                     </h5>
-                                                        <div class="col-lg-9">
-                                        <div class="card-body b-l calender-sidebar">
-                                            <div id="calendar"></div>
-                                        </div>
-                                    </div>
+                    <div class="container">
+                      <div id="calendar"></div>
+                      <div class="modal fade" id="KalenderModal" tabindex="-1" aria-hidden="true" style="display: none;">
+                        <div class="modal-dialog modal-xl">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="tanggal_spm"></h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <table id="spm_tgl" class="table table-striped datatable">
+                                <thead>
+                                  <tr>
+                                    <th scope="col" style="width: 5%;">No. SPM</th>
+                                    <th scope="col" style="width: 10%;">Tgl. SPM</th>
+                                    <th scope="col" style="width: 55%;">Uraian</th>
+                                    <th scope="col" style="width: 10%;">Jumlah</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <!-- isi tabel akan di-generate oleh kode JavaScript -->
+                                </tbody>
+                              </table>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -174,33 +267,99 @@ var urlx=getScriptUrl();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.3.2/tinymce.min.js"></script>
     <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
     <!-- Template Main JS File -->
     <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/js/main.js"></script>
-   
     <script>
-document.getElementById("loading-screen").style.display = "flex";
+      document.getElementById("loading-screen").style.display = "flex";
 
       function GetURL(callback) {
         google.script.run.withSuccessHandler(callback).getScriptUrl();
       }
-GetURL(function(url){
-  console.log("url : " + url);
-  document.getElementById("link-daftar-spm").href=url+"?p=daftarspm";
-  document.getElementById("home").href=url+"?p=home";
-  document.getElementById("link-proyeksi-sp2d").href=url+"?p=proyeksi_sp2d";
-  document.getElementById("link-proyeksi-spm").href=url+"?p=proyeksi_spm";
-  document.getElementById("link-rka").href=url+"?p=rka";
-  document.getElementById("link-kalender").href=url+"?p=kalender";
- 
-});
+      GetURL(function(url) {
+        console.log("url : " + url);
+        document.getElementById("link-daftar-spm").href = url + "?p=daftarspm";
+        document.getElementById("home").href = url + "?p=home";
+        document.getElementById("link-proyeksi-sp2d").href = url + "?p=proyeksi_sp2d";
+        document.getElementById("link-proyeksi-spm").href = url + "?p=proyeksi_spm";
+        document.getElementById("link-rka").href = url + "?p=rka";
+        document.getElementById("link-kalender").href = url + "?p=kalender";
+      });
       $(document).ready(function() {
         // panggil google.script.run() dengan handler kesuksesan
-        //google.script.run.withSuccessHandler(onSuccess).getRKA();
+        google.script.run.withSuccessHandler(onSuccess).getKalender();
 
-        //function onSuccess(Array_RKA) {
+        function onSuccess(Array_Kalender) {
+          $(document).ready(function() {
+            // Data kalender dari sebuah array
+            var kalender = [];
+            //console.log("data dari server KAlender:", Array_Kalender);
+            for (var i = 0; i < Array_Kalender.length; i++) {
+              var tanggal = new Date(Array_Kalender[i][0]);
+              var text = Array_Kalender[i][1];
+              var angka = parseInt(text.replace(/\D/g, ''));
+              angka = angka.toLocaleString('id-ID');
+              kalender.push({
+                title: angka,
+                start: tanggal
+              });
+            }
+            //console.log(kalender);
+            // Menginisialisasi kalender dengan data dari array
+            $('#calendar').fullCalendar({
+              editable: true, // Mengaktifkan pengeditan pada kalender
+              displayEventTime: false,
+              header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,basicWeek,basicDay'
+              },
+              events: kalender, // Menggunakan data dari array sebagai acara pada kalender
+              // Memanggil fungsi eventClick ketika pengguna mengklik sebuah acara
+              eventClick: function(info) {
+                document.getElementById("loading-screen").style.display = "flex";
+                
+                $('#KalenderModal').modal('show');
+                $('#tanggal_spm').val(moment(info.event.start).format('dd/mm/yyyy'));
+                google.script.run.withSuccessHandler(onSuccess).getSPMTgl();
+
+                function onSuccess(Array_SPM) {
+                  document.getElementById("loading-screen").style.display = "none";
+                  try {
+                    if (Array_SPM === null) {
+                      throw new Error("Data dari server adalah null.");
+                    }
+                    console.log("data dari server SPM:", Array_SPM);
+                    // hapus baris pada tabel kecuali header
+                    var table_spm = $('#spm_tgl').DataTable({
+                      order: [
+                        [1, 'desc']
+                      ],
+                       destroy: true,
+                    
+                    });
+                    table_spm.clear().draw();
+                    // tambahkan data pada tabel
+                    for (var i = 0; i < Array_SPM.length; i++) {
+                      var dataRowSPM = [" <a href =<?= urlx ?>?p=detilspm&no="+ Array_SPM[i][0]+">"+Array_SPM[i][0]+"</a>",
+                        Array_SPM[i][1],
+                        Array_SPM[i][2],
+                        Array_SPM[i][3]
+                      ];
+                      table_spm.row.add(dataRowSPM).draw();
+                    }
+                    
+                  } catch (error) {
+                    console.error("Terjadi kesalahan saat memproses data dari server:", error);
+                  }
+                }
+                
+              }
+            });
+          });
           document.getElementById("loading-screen").style.display = "none";
-     
+        }
       });
     </script>
   </body>
