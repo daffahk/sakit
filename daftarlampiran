@@ -1,0 +1,265 @@
+<?
+var urlx=getScriptUrl();
+?>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base target="_top">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.snow.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.bubble.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/2.5.0/remixicon.css" rel="stylesheet">
+    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- Template Main CSS File -->
+    <link href="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/css/style.css" rel="stylesheet">
+    <!-- =======================================================
+  * Template Name: NiceAdmin - v2.5.0
+  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+    <style>
+      .loading-screen {
+        position: fixed;
+        z-index: 999;
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .loading-spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="loading-screen" class="loading-screen" style="display: flex;">
+      <div class="loading-spinner"></div>
+    </div>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+      <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+          <img src="assets/img/logo.png" alt="">
+          <span class="d-none d-lg-block">SAKIT</span>
+        </a>
+        <i class="bi bi-list toggle-sidebar-btn"></i>
+      </div>
+      <!-- End Logo -->
+      <nav class="header-nav ms-auto">
+        <ul class="d-flex align-items-center">
+          <li class="nav-item d-block d-lg-none">
+            <a class="nav-link nav-icon search-bar-toggle " href="#">
+              <i class="bi bi-search"></i>
+            </a>
+          </li>
+          <!-- End Search Icon-->
+        </ul>
+      </nav>
+      <!-- End Icons Navigation -->
+    </header>
+    <!-- End Header -->
+    <?!= include('sidebar'); ?>
+    <main id="main" class="main">
+      <div class="pagetitle">
+        <h1>Dashboard</h1>
+        <nav>
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Dashboard</li>
+          </ol>
+        </nav>
+      </div>
+      <!-- End Page Title -->
+      <section class="section dashboard">
+        <div class="row">
+          <!-- Left side columns -->
+          <div class="col-lg-12">
+            <div class="row">
+              <!-- Recent Sales -->
+              <div class="col-12">
+                <div class="card recent-sales overflow-auto">
+                  <div class="filter">
+                    <a class="icon" href="#" data-bs-toggle="dropdown">
+                      <i class="bi bi-three-dots"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                      <li class="dropdown-header text-start">
+                        <h6>Filter</h6>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#hari_ini">Hari Ini</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#bulan_ini">Bulan Ini</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">Daftar Lampiran SPM<span>| Keseluruhan</span>
+                    </h5>
+                    <table id="lampiran_semua" class="table table-striped datatable">
+                      <thead>
+                        <tr>
+                          <th scope="col" style="width: 10%;">ID</th>
+                          <th scope="col" style="width: 55%;">nama</th>
+                          <th scope="col" style="width: 35%;">Jumlah Pendapatan</th>
+                          
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <!-- isi tabel akan di-generate oleh kode JavaScript -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <!-- End Recent Sales -->
+            </div>
+          </div>
+          <!-- End Left side columns -->
+        </div>
+      </section>
+    </main>
+    <!-- End #main -->
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+      <div class="copyright"> &copy; Copyright <strong>
+          <span>NiceAdmin</span>
+        </strong>. All Rights Reserved </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ --> Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </footer>
+    <!-- End Footer -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+    <!-- Vendor JS Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.37.1/apexcharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.1/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.7/quill.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.3.2/tinymce.min.js"></script>
+    <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.25/sorting/datetime-moment.js"></script>
+    <!-- Template Main JS File -->
+    <script src="https://bootstrapmade.com/demo/templates/NiceAdmin/assets/js/main.js"></script>
+    <script>
+      document.getElementById("loading-screen").style.display = "flex";
+      const today = new Date();
+      const yyyy = today.getFullYear();
+      let mm = today.getMonth() + 1; // Months start at 0!
+      let dd = today.getDate();
+      if (dd < 10) dd = '0' + dd;
+      if (mm < 10) mm = '0' + mm;
+      const formattedToday = dd + '/' + mm + '/' + yyyy;
+      const formattedMonth = mm + '/' + yyyy;
+
+      function GetURL(callback) {
+        google.script.run.withSuccessHandler(callback).getScriptUrl();
+      }
+      GetURL(function(url) {
+        console.log("url : " + url);
+        document.getElementById("link-daftar-spm").href = url + "?p=daftarspm";
+        document.getElementById("home").href = url + "?p=home";
+        document.getElementById("link-proyeksi-sp2d").href = url + "?p=proyeksi_sp2d";
+        document.getElementById("link-proyeksi-spm").href = url + "?p=proyeksi_spm";
+        document.getElementById("link-rka").href = url + "?p=rka";
+        document.getElementById("link-kalender").href = url + "?p=kalender";
+        document.getElementById("link-lampiran").href = url + "?p=lampiran";
+      });
+      $(document).ready(function() {
+        $.fn.dataTable.moment('DD/MM/YYYY');
+        $('a[href="#hari_ini"]').click(function(event) {
+          event.preventDefault();
+          $('#lampiran_semua').DataTable().search(formattedToday).draw();
+        });
+        $('a[href="#bulan_ini"]').click(function(event) {
+          event.preventDefault();
+          $('#lampiran_semua').DataTable().search(formattedMonth).draw();
+        });
+        // panggil google.script.run() dengan handler kesuksesan
+        google.script.run.withSuccessHandler(onSuccess).getLampiran();
+
+        function onSuccess(Array_Lampiran) {
+          document.getElementById("loading-screen").style.display = "none";
+          try {
+            if (Array_Lampiran === null) {
+              throw new Error("Data dari server adalah null.");
+            }
+            console.log("data dari server Lampiran:", Array_Lampiran);
+            // hapus baris pada tabel kecuali header
+            var table_lampiran = $('#lampiran_semua').DataTable({
+              order: [
+                [0, 'asc']
+              ],
+              columnDefs: [{
+                targets: [2],
+                className: "text-right"
+              }, {
+                targets: 2,
+                render: $.fn.dataTable.render.number('.', ',', 0, ''),
+              }],
+            });
+            table_lampiran.clear().draw();
+            // tambahkan data pada tabel
+            for (var i = 0; i < Array_Lampiran.length; i++) {
+              var dataRowLampiran= [" <a href =<?= urlx ?>?p=orang&id="+ Array_Lampiran[i][1]+">"+Array_Lampiran[i][1]+"</a>",
+                Array_Lampiran[i][0],
+                Array_Lampiran[i][2],
+              
+              ];
+              table_lampiran.row.add(dataRowLampiran).draw();
+            }
+          } catch (error) {
+            console.error("Terjadi kesalahan saat memproses data dari server:", error);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
