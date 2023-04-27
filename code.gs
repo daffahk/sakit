@@ -39,6 +39,8 @@ function doGet(e) {
        }
   }  else if (e.parameter.p == "proyeksi_sp2d") {
     return load_halaman("proyeksi_sp2d");
+   }  else if (e.parameter.p == "lampiran") {
+    return load_halaman("daftarlampiran");
   }   else if (e.parameter.p == "kalender") {
     return load_halaman("kalender");
   } else if (e.parameter.p == "proyeksi_spm") {
@@ -103,6 +105,13 @@ function getScriptUrl() {
  return url;
 }
 
+function getKalender() {
+  var limit = "AL"+(ambil_cell("dashboard","AL1")+3);
+
+  var arr = getRangeData("dashboard","AK4",limit,true);
+  console.log("ARR Kalender : " + arr);
+  return arr;
+}
 
 function getSPMTerbaru() {
   var limit = "E"+(ambil_cell("dashboard","C21")+22);
@@ -119,8 +128,14 @@ function getSPMSemua() {
   console.log("ARR SPM : " + arr);
   return arr;
 }
+function getSPMTgl(tgl_spm) {
+  setSheet("SPM_tanggal","E1",tgl_spm);
+  var limit = "D"+(ambil_cell("SPM_tanggal","F1")+1);
 
-
+  var arr = getRangeData("SPM_tanggal","A2",limit,true);
+  console.log("ARR SPM : " + arr);
+  return arr;
+}
 function getSP2DTerbaru() {
   var limit = "K"+(ambil_cell("dashboard","H21")+22);
 
@@ -203,6 +218,15 @@ function getLampiranSPM(no_spm) {
 
 }
 
+function getLampiran() {
+  
+  var limit="C"+(ambil_cell("orang","D1"));
+   var arr = getRangeData("orang","A2",limit,true);
+  console.log("ARR Lampiran : " + arr);
+  return arr;
+
+}
+
 function ambil_cell(nama_sheet, cellnya, display) {
 
     var webAppSheet = ss.getSheetByName(nama_sheet);
@@ -245,7 +269,7 @@ function format_angka(angka) {
 function testing(){
  
  
- var arr=getLampiranSPM(235);
+ var arr=getLampiran();
  return arr;
 }
 
